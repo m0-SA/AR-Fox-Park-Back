@@ -1,93 +1,69 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
-        <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-        <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-    </head>
 
-    <body style="margin: 0; overflow: hidden;">
-        <a-scene
-            renderer="logarithmicDepthBuffer: true;"
-            embedded
-            loading-screen="enabled: false;"
-            arjs="sourceType: webcam; debugUIEnabled: false;"
-        >
-            <a-assets>
-                <a-asset-item
-                    id="animated-asset"
-                    src="assets/asset.glb"
-                ></a-asset-item>
-            </a-assets>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    <script>
+        AFRAME.registerComponent('clicker', {
+            init: function () {
+                this.el.addEventListener('click', e => {
+                var diceRoll = Math.floor(Math.random() * 12) + 1;
+                    if (diceRoll >= 9) {
+                        alert('You rolled a ' + diceRoll + '.\n Monster defeated!');
+                    }
+                    else if (diceRoll === 8) {
+                        alert('You rolled a ' + diceRoll + '.\n Draw!');
+                    }
+                    else if (diceRoll <= 6) {
+                        alert('You rolled a ' + diceRoll + '.\n Lose an action point!');
+                    }
+                })}});
+    </script>
+</head>
 
-                <a-entity
-                    look-at="[gps-camera]"
-                    animation-mixer="loop: repeat"
-                    gltf-model="#animated-asset"
-                    scale="0.012926588414020465 0.012926588414020465 0.012926588414020465"
-                    gps-entity-place="latitude: 52.64956230124502; longitude: -1.1192237958312037;"
-                ></a-entity>
-                <a-entity
-                    look-at="[gps-camera]"
-                    animation-mixer="loop: repeat"
-                    gltf-model="#animated-asset"
-                    scale="0.012926588414020465 0.012926588414020465 0.012926588414020465"
-                    gps-entity-place="latitude: 52.64959810106387; longitude: -1.1195939406752589;"
-                ></a-entity>
-                <a-entity
-                    look-at="[gps-camera]"
-                    animation-mixer="loop: repeat"
-                    gltf-model="#animated-asset"
-                    scale="0.012926588414020465 0.012926588414020465 0.012926588414020465"
-                    gps-entity-place="latitude: 52.65001467861934; longitude: -1.1197602376341822;"
-                ></a-entity>
-                <a-entity
-                    look-at="[gps-camera]"
-                    animation-mixer="loop: repeat"
-                    gltf-model="#animated-asset"
-                    scale="0.012926588414020465 0.012926588414020465 0.012926588414020465"
-                    gps-entity-place="latitude: 52.65030758233679; longitude: -1.1201250180602076;"
-                ></a-entity>
-                <a-entity
-                    look-at="[gps-camera]"
-                    animation-mixer="loop: repeat"
-                    gltf-model="#animated-asset"
-                    scale="0.012926588414020465 0.012926588414020465 0.012926588414020465"
-                    gps-entity-place="latitude: 52.649523246863744; longitude: -1.1212300881743433;"
-                ></a-entity>
-                <a-entity
-                    look-at="[gps-camera]"
-                    animation-mixer="loop: repeat"
-                    gltf-model="#animated-asset"
-                    scale="0.012926588414020465 0.012926588414020465 0.012926588414020465"
-                    gps-entity-place="latitude: 52.64910015549756; longitude: -1.120591722428799;"
-                ></a-entity>
-                <a-entity
-                    look-at="[gps-camera]"
-                    animation-mixer="loop: repeat"
-                    gltf-model="#animated-asset"
-                    scale="0.012926588414020465 0.012926588414020465 0.012926588414020465"
-                    gps-entity-place="latitude: 52.648550130601535; longitude: -1.1202430352568629;"
-                ></a-entity>
-                <a-entity
-                    look-at="[gps-camera]"
-                    animation-mixer="loop: repeat"
-                    gltf-model="#animated-asset"
-                    scale="0.012926588414020465 0.012926588414020465 0.012926588414020465"
-                    gps-entity-place="latitude: 52.64876818863656; longitude: -1.1204200610518458;"
-                ></a-entity>
-                <a-entity
-                    look-at="[gps-camera]"
-                    animation-mixer="loop: repeat"
-                    gltf-model="#animated-asset"
-                    scale="0.012926588414020465 0.012926588414020465 0.012926588414020465"
-                    gps-entity-place="latitude: 52.64862173186726; longitude: -1.1172228679060938;"
-                ></a-entity>
+<body style="margin: 0; overflow: hidden;">
+    <a-scene vr-mode-ui="enabled: false" cursor='rayOrigin: mouse' raycaster='near: 0; far: 50000'
+        arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false; '
+        renderer='antialias: true; alpha: true; logarithmicDepthBuffer: true;" embedded loading-screen="enabled: false;"'>
+        <a-assets>
+            <a-asset-item id="animated-asset" src="assets/asset.glb"></a-asset-item>
+        </a-assets>
 
-            <a-camera gps-camera rotation-reader></a-camera>
-        </a-scene>
-    </body>
+        <a-entity look-at="[gps-camera]" animation-mixer="loop: repeat" gltf-model="#animated-asset"
+            scale="0.012926588414020465 0.012926588414020465 0.012926588414020465"
+            gps-entity-place="latitude: 52.64956230124502; longitude: -1.1192237958312037;"></a-entity>
+        <a-entity look-at="[gps-camera]" animation-mixer="loop: repeat" gltf-model="#animated-asset"
+            scale="0.012926588414020465 0.012926588414020465 0.012926588414020465"
+            gps-entity-place="latitude: 52.64959810106387; longitude: -1.1195939406752589;"></a-entity>
+        <a-entity look-at="[gps-camera]" animation-mixer="loop: repeat" gltf-model="#animated-asset"
+            scale="0.012926588414020465 0.012926588414020465 0.012926588414020465"
+            gps-entity-place="latitude: 52.65001467861934; longitude: -1.1197602376341822;"></a-entity>
+        <a-entity look-at="[gps-camera]" animation-mixer="loop: repeat" gltf-model="#animated-asset"
+            scale="0.012926588414020465 0.012926588414020465 0.012926588414020465"
+            gps-entity-place="latitude: 52.65030758233679; longitude: -1.1201250180602076;"></a-entity>
+        <a-entity look-at="[gps-camera]" animation-mixer="loop: repeat" gltf-model="#animated-asset"
+            scale="0.012926588414020465 0.012926588414020465 0.012926588414020465"
+            gps-entity-place="latitude: 52.649523246863744; longitude: -1.1212300881743433;"></a-entity>
+        <a-entity look-at="[gps-camera]" animation-mixer="loop: repeat" gltf-model="#animated-asset"
+            scale="0.012926588414020465 0.012926588414020465 0.012926588414020465"
+            gps-entity-place="latitude: 52.64910015549756; longitude: -1.120591722428799;"></a-entity>
+        <a-entity look-at="[gps-camera]" animation-mixer="loop: repeat" gltf-model="#animated-asset"
+            scale="0.012926588414020465 0.012926588414020465 0.012926588414020465"
+            gps-entity-place="latitude: 52.648550130601535; longitude: -1.1202430352568629;"></a-entity>
+        <a-entity look-at="[gps-camera]" animation-mixer="loop: repeat" gltf-model="#animated-asset"
+            scale="0.012926588414020465 0.012926588414020465 0.012926588414020465"
+            gps-entity-place="latitude: 52.64876818863656; longitude: -1.1204200610518458;"></a-entity>
+        <a-entity look-at="[gps-camera]" animation-mixer="loop: repeat" gltf-model="#animated-asset"
+            scale="0.012926588414020465 0.012926588414020465 0.012926588414020465"
+            gps-entity-place="latitude: 52.64862173186726; longitude: -1.1172228679060938;"></a-entity>
+
+        <a-camera gps-camera rotation-reader></a-camera>
+    </a-scene>
+</body>
+
 </html>
